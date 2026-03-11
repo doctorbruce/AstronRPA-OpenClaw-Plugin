@@ -1,0 +1,38 @@
+{
+  "id": "astron-rpa",
+  "name": "Astron RPA",
+  "description": "HTTP tool plugin for calling an Astron RPA service.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "apiKey": {
+        "type": "string",
+        "description": "Optional bearer token or API key."
+      },
+      "baseUrl": {
+        "type": "string",
+        "description": "Optional API base URL override."
+      },
+      "timeoutMs": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 120000,
+        "default": 30000
+      }
+    }
+  },
+  "uiHints": {
+    "apiKey": {
+      "label": "API Key",
+      "sensitive": true
+    },
+    "baseUrl": {
+      "label": "Base URL",
+      "placeholder": "https://newapi.iflyrpa.com/api/rpa-openapi"
+    },
+    "timeoutMs": {
+      "label": "Timeout (ms)"
+    }
+  }
+}
