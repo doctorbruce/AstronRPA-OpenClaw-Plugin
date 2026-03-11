@@ -241,6 +241,5 @@ export default function register(api: OpenClawPluginApi) {
         }
       },
     } as AnyAgentTool,
-    { optional: true },
   );
 }
