@@ -1,5 +1,5 @@
 {
-  "name": "@openclaw/astron-rpa",
+  "name": "@astronrpa/openclaw-plugin",
   "version": "1.0.0",
   "description": "OpenClaw HTTP plugin for Astron RPA",
   "keywords": [
@@ -13,8 +13,12 @@
     "plugin.ts",
     "openclaw.plugin.json",
     "README.md",
-    "README.zh-CN.md"
+    "README.zh-CN.md",
+    "images"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "openclaw": "*"
   },

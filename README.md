@@ -1,6 +1,6 @@
-<h1><img src="./images/icon.png" alt="Astron RPA logo" width="40" style="vertical-align: middle;" /> Astron RPA Plugin</h1>
+<h1><img src="./images/icon.png" alt="Astron RPA logo" width="40" style="vertical-align: middle;" /> AstronRPA Connector for OpenClaw</h1>
 
-Astron RPA is a small OpenClaw tool plugin that calls the iFlyRPA Open API over HTTP.
+This plugin connects OpenClaw to the AstronRPA Open API over HTTP.
 
 For Chinese instructions, see [README.zh-CN.md](./README.zh-CN.md).
 
@@ -18,7 +18,13 @@ Supported actions:
 
 ## Install
 
-### Option 1: Manual install
+### Option 1: Install from npm
+
+```bash
+openclaw plugins install @astronrpa/openclaw-plugin
+```
+
+### Option 2: Manual install
 
 Download or copy this directory to:
 
@@ -40,7 +46,7 @@ openclaw plugins list
 
 You should see `astron-rpa` in the plugin list.
 
-### Option 2: Install from a cloned GitHub repo
+### Option 3: Install from a cloned GitHub repo
 
 Clone the repository locally, then install it from the local directory:
 
@@ -62,12 +68,12 @@ Note:
 - `openclaw plugins install` does not support GitHub repo URLs directly.
 - Use a local path, a local `.zip` / `.tgz`, or publish the plugin to npm.
 
-### Option 3: Install from a packaged archive
+### Option 4: Install from a packaged archive
 
 If you package the plugin as `.zip`, `.tgz`, or `.tar.gz`, install it from the local file:
 
 ```bash
-openclaw plugins install ./astron-rpa.tgz
+openclaw plugins install ./astronrpa-openclaw-plugin-1.0.0.tgz
 ```
 
 ## openclaw.json
@@ -177,7 +183,7 @@ For an independent repo, keep these files in the package root:
 If you publish to npm, users can install it with:
 
 ```bash
-openclaw plugins install @openclaw/astron-rpa
+openclaw plugins install @astronrpa/openclaw-plugin
 ```
 
 ## Debugging

@@ -1,6 +1,6 @@
-<h1><img src="./images/icon.png" alt="Astron RPA logo" width="40" style="vertical-align: middle;" /> Astron RPA 插件</h1>
+<h1><img src="./images/icon.png" alt="Astron RPA logo" width="40" style="vertical-align: middle;" /> OpenClaw AstronRPA 连接插件</h1>
 
-Astron RPA 是一个 OpenClaw 工具插件，用来通过 HTTP 调用 iFlyRPA Open API。
+这个插件用于连接 OpenClaw 和 AstronRPA Open API，并通过 HTTP 发起调用。
 
 当前工具名：`astron_rpa`
 
@@ -18,7 +18,13 @@ Astron RPA 是一个 OpenClaw 工具插件，用来通过 HTTP 调用 iFlyRPA Op
 
 ## 安装方式
 
-### 方式 1：手动安装
+### 方式 1：从 npm 安装
+
+```bash
+openclaw plugins install @astronrpa/openclaw-plugin
+```
+
+### 方式 2：手动安装
 
 把当前目录下载或复制到：
 
@@ -40,7 +46,7 @@ openclaw plugins list
 
 确认 `astron-rpa` 已经出现在插件列表中。
 
-### 方式 2：从 GitHub 仓库 clone 后本地安装
+### 方式 3：从 GitHub 仓库 clone 后本地安装
 
 先把插件仓库 clone 到本地，再从本地目录 link 安装：
 
@@ -62,10 +68,10 @@ openclaw plugins list
 - `openclaw plugins install` 不能直接安装 GitHub 仓库 URL。
 - 目前支持的是本地路径、本地压缩包（`.zip` / `.tgz` / `.tar.gz`）以及 npm 包名。
 
-### 方式 3：从本地压缩包安装
+### 方式 4：从本地压缩包安装
 
 ```bash
-openclaw plugins install ./astron-rpa.tgz
+openclaw plugins install ./astronrpa-openclaw-plugin-1.0.0.tgz
 ```
 
 ## openclaw.json 配置
@@ -175,7 +181,7 @@ Content-Type: application/json
 如果后续发布到 npm，用户就可以直接这样安装：
 
 ```bash
-openclaw plugins install @openclaw/astron-rpa
+openclaw plugins install @astronrpa/openclaw-plugin
 ```
 
 ## 调试
