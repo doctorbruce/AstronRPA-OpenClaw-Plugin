@@ -45,8 +45,8 @@ You should see `astron-rpa` in the plugin list.
 Clone the repository locally, then install it from the local directory:
 
 ```bash
-git clone <your-plugin-repo-url>
-cd <your-plugin-repo>
+git clone https://github.com/doctorbruce/AstronRPA-OpenClaw-Plugin.git
+cd AstronRPA-OpenClaw-Plugin
 openclaw plugins install -l .
 ```
 

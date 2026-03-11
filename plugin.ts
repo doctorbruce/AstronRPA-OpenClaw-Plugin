@@ -1,5 +1,6 @@
 import type { AnyAgentTool, OpenClawPluginApi } from "openclaw/plugin-sdk/core";
-import { request } from "undici";
+import { request as httpRequest } from "node:http";
+import { request as httpsRequest } from "node:https";
 
 const DEFAULT_BASE_URL = "https://newapi.iflyrpa.com/api/rpa-openapi";
 
@@ -87,6 +88,10 @@ function safePreview(text: string, limit = 500) {
   return text.length <= limit ? text : `${text.slice(0, limit)}...`;
 }
 
+function getHeaderValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value.join(", ") : (value ?? "");
+}
+
 async function sendJsonRequest(params: {
   body?: unknown;
   headers: Record<string, string>;
@@ -94,40 +99,94 @@ async function sendJsonRequest(params: {
   timeoutMs: number;
   url: string;
 }) {
-  const response = await request(params.url, {
-    method: params.method,
-    headers: params.headers,
-    body: params.body === undefined ? undefined : JSON.stringify(params.body),
-    bodyTimeout: params.timeoutMs,
-    headersTimeout: params.timeoutMs,
-  });
+  const url = new URL(params.url);
+  const requestImpl =
+    url.protocol === "https:" ? httpsRequest : url.protocol === "http:" ? httpRequest : undefined;
 
-  const contentType = response.headers["content-type"]?.toString() ?? "";
-  const text = await response.body.text();
-
-  try {
-    return {
-      ok: response.statusCode >= 200 && response.statusCode < 300,
-      status: response.statusCode,
-      body: {
-        parsed: JSON.parse(text) as unknown,
-        rawText: text,
-        contentType,
-        isJson: true,
-      },
-    };
-  } catch {
-    return {
-      ok: response.statusCode >= 200 && response.statusCode < 300,
-      status: response.statusCode,
-      body: {
-        parsed: null,
-        rawText: text,
-        contentType,
-        isJson: false,
-      },
-    };
+  if (!requestImpl) {
+    throw new Error(`Unsupported protocol: ${url.protocol}`);
   }
+
+  const bodyText = params.body === undefined ? undefined : JSON.stringify(params.body);
+
+  return await new Promise<{
+    ok: boolean;
+    status: number;
+    body: {
+      parsed: unknown;
+      rawText: string;
+      contentType: string;
+      isJson: boolean;
+    };
+  }>((resolve, reject) => {
+    const request = requestImpl(
+      {
+        protocol: url.protocol,
+        hostname: url.hostname,
+        port: url.port ? Number(url.port) : undefined,
+        path: `${url.pathname}${url.search}`,
+        method: params.method,
+        headers: {
+          ...params.headers,
+          ...(bodyText === undefined
+            ? {}
+            : {
+                "Content-Length": Buffer.byteLength(bodyText).toString(),
+              }),
+        },
+        timeout: params.timeoutMs,
+      },
+      (response) => {
+        const chunks: Buffer[] = [];
+
+        response.on("data", (chunk) => {
+          chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+        });
+
+        response.on("end", () => {
+          const text = Buffer.concat(chunks).toString("utf8");
+          const contentType = getHeaderValue(response.headers["content-type"]);
+          const status = response.statusCode ?? 0;
+
+          try {
+            resolve({
+              ok: status >= 200 && status < 300,
+              status,
+              body: {
+                parsed: JSON.parse(text) as unknown,
+                rawText: text,
+                contentType,
+                isJson: true,
+              },
+            });
+          } catch {
+            resolve({
+              ok: status >= 200 && status < 300,
+              status,
+              body: {
+                parsed: null,
+                rawText: text,
+                contentType,
+                isJson: false,
+              },
+            });
+          }
+        });
+      },
+    );
+
+    request.on("timeout", () => {
+      request.destroy(new Error(`Request timed out after ${params.timeoutMs}ms`));
+    });
+
+    request.on("error", reject);
+
+    if (bodyText !== undefined) {
+      request.write(bodyText);
+    }
+
+    request.end();
+  });
 }
 
 export default function register(api: OpenClawPluginApi) {

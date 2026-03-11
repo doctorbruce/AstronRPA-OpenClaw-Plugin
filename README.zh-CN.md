@@ -45,8 +45,8 @@ openclaw plugins list
 先把插件仓库 clone 到本地，再从本地目录 link 安装：
 
 ```bash
-git clone <你的插件仓库地址>
-cd <你的插件仓库>
+git clone https://github.com/doctorbruce/AstronRPA-OpenClaw-Plugin.git
+cd AstronRPA-OpenClaw-Plugin
 openclaw plugins install -l .
 ```
 
