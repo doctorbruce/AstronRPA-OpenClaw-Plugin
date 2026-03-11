@@ -1,4 +1,4 @@
-# Astron RPA 插件
+<h1><img src="./images/icon.png" alt="Astron RPA logo" width="40" style="vertical-align: middle;" /> Astron RPA 插件</h1>
 
 Astron RPA 是一个 OpenClaw 工具插件，用来通过 HTTP 调用 iFlyRPA Open API。
 
@@ -139,6 +139,8 @@ GET https://newapi.iflyrpa.com/api/rpa-openapi/workflows/get
 Authorization: Bearer <token>
 ```
 
+![Get workflows demo](./images/get_workflows.gif)
+
 ### 2. 同步执行工作流
 
 ```json
@@ -157,6 +159,8 @@ POST https://newapi.iflyrpa.com/api/rpa-openapi/workflows/execute
 Authorization: Bearer <token>
 Content-Type: application/json
 ```
+
+![Run workflow demo](./images/run_workflow.gif)
 
 ## 发布建议
 

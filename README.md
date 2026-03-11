@@ -1,4 +1,4 @@
-# Astron RPA Plugin
+<h1><img src="./images/icon.png" alt="Astron RPA logo" width="40" style="vertical-align: middle;" /> Astron RPA Plugin</h1>
 
 Astron RPA is a small OpenClaw tool plugin that calls the iFlyRPA Open API over HTTP.
 
@@ -141,6 +141,8 @@ GET https://newapi.iflyrpa.com/api/rpa-openapi/workflows/get
 Authorization: Bearer <token>
 ```
 
+![Get workflows demo](./images/get_workflows.gif)
+
 ### 2. Execute a workflow synchronously
 
 ```json
@@ -159,6 +161,8 @@ POST https://newapi.iflyrpa.com/api/rpa-openapi/workflows/execute
 Authorization: Bearer <token>
 Content-Type: application/json
 ```
+
+![Run workflow demo](./images/run_workflow.gif)
 
 ## Publishing
 
