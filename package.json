@@ -1,6 +1,6 @@
 {
   "name": "@astronrpa/openclaw-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OpenClaw HTTP plugin for Astron RPA",
   "keywords": [
     "openclaw",

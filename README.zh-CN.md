@@ -71,7 +71,7 @@ openclaw plugins list
 ### 方式 4：从本地压缩包安装
 
 ```bash
-openclaw plugins install ./astronrpa-openclaw-plugin-1.0.0.tgz
+openclaw plugins install ./astronrpa-openclaw-plugin-1.0.1.tgz
 ```
 
 ## openclaw.json 配置

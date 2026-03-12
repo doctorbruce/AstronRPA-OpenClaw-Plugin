@@ -73,7 +73,7 @@ Note:
 If you package the plugin as `.zip`, `.tgz`, or `.tar.gz`, install it from the local file:
 
 ```bash
-openclaw plugins install ./astronrpa-openclaw-plugin-1.0.0.tgz
+openclaw plugins install ./astronrpa-openclaw-plugin-1.0.1.tgz
 ```
 
 ## openclaw.json
