@@ -82,10 +82,10 @@ OpenClaw 的配置文件通常在：
 ~/.openclaw/openclaw.json
 ```
 
-你这台 Windows 机器上的路径是：
+在 Windows 上通常是：
 
 ```text
-C:\Users\zyzhou23\.openclaw\openclaw.json
+C:\Users\<your-username>\.openclaw\openclaw.json
 ```
 
 最小可用配置如下：

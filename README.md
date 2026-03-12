@@ -84,10 +84,10 @@ OpenClaw config is typically stored at:
 ~/.openclaw/openclaw.json
 ```
 
-On this Windows machine, that path is:
+On Windows, it is typically:
 
 ```text
-C:\Users\zyzhou23\.openclaw\openclaw.json
+C:\Users\<your-username>\.openclaw\openclaw.json
 ```
 
 Add the plugin config:
