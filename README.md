@@ -29,7 +29,7 @@ openclaw plugins install @astronrpa/openclaw-plugin
 Download or copy this directory to:
 
 ```text
-~/openclaw/extensions/astron-rpa
+~/.openclaw/extensions/astron-rpa
 ```
 
 Make sure the directory contains:
@@ -109,11 +109,24 @@ Add the plugin config:
 }
 ```
 
+You can set the API key either in the OpenClaw UI or from the CLI:
+
+```bash
+openclaw config set plugins.entries.astron-rpa.config.apiKey 'xxxxxxxxxxx'
+```
+
+Also enable the full tool profile:
+
+```bash
+openclaw config set tools.profile 'full'
+```
+
 Notes:
 
 - `apiKey` is required.
+- `apiKey` can be configured in the UI or with `openclaw config set plugins.entries.astron-rpa.config.apiKey 'xxxxxxxxxxx'`.
 - `baseUrl` is optional. If omitted, the plugin defaults to `https://newapi.iflyrpa.com/api/rpa-openapi`.
-- `astron_rpa` is enabled by default once the plugin is loaded.
+- `astron_rpa` is available after the plugin is loaded and `tools.profile` is set to `full`.
 - If your config already uses `plugins.allow`, also add `astron-rpa` there.
 
 Example:
@@ -170,22 +183,6 @@ Content-Type: application/json
 
 ![Run workflow demo](./images/run_workflow.gif)
 
-## Publishing
-
-For an independent repo, keep these files in the package root:
-
-- `plugin.ts`
-- `openclaw.plugin.json`
-- `package.json`
-- `README.md`
-- `README.zh-CN.md`
-
-If you publish to npm, users can install it with:
-
-```bash
-openclaw plugins install @astronrpa/openclaw-plugin
-```
-
 ## Debugging
 
 The plugin logs request URL, status code, content type, and a short preview when the response is not JSON.
@@ -199,5 +196,6 @@ openclaw plugins doctor
 
 If the tool is not available to the agent, first check:
 
+- `openclaw config get tools.profile` returns `full`
 - `plugins.entries["astron-rpa"].enabled` is `true`
 - `plugins.allow` contains `astron-rpa` if you use a plugin allowlist

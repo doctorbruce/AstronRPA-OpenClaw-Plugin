@@ -29,7 +29,7 @@ openclaw plugins install @astronrpa/openclaw-plugin
 把当前目录下载或复制到：
 
 ```text
-~/openclaw/extensions/astron-rpa
+~/.openclaw/extensions/astron-rpa
 ```
 
 确保目录中包含这些文件：
@@ -107,11 +107,24 @@ C:\Users\zyzhou23\.openclaw\openclaw.json
 }
 ```
 
+`apiKey` 既可以在 OpenClaw 界面里设置，也可以用命令行设置：
+
+```bash
+openclaw config set plugins.entries.astron-rpa.config.apiKey 'xxxxxxxxxxx'
+```
+
+另外需要启用完整工具配置：
+
+```bash
+openclaw config set tools.profile 'full'
+```
+
 说明：
 
 - `apiKey` 必填。
+- `apiKey` 可以在界面里配置，也可以通过 `openclaw config set plugins.entries.astron-rpa.config.apiKey 'xxxxxxxxxxx'` 设置。
 - `baseUrl` 可选；不填时默认使用 `https://newapi.iflyrpa.com/api/rpa-openapi`。
-- `astron_rpa` 在插件加载后默认可用，不需要再额外写 `tools.allow`。
+- `astron_rpa` 需要在插件加载后并且 `tools.profile` 设置为 `full` 时才可用。
 - 如果你的配置启用了 `plugins.allow` 白名单，还需要把 `astron-rpa` 加进去。
 
 例如：
@@ -168,22 +181,6 @@ Content-Type: application/json
 
 ![Run workflow demo](./images/run_workflow.gif)
 
-## 发布建议
-
-如果你准备把它做成独立仓库，建议包根目录至少保留这些文件：
-
-- `plugin.ts`
-- `openclaw.plugin.json`
-- `package.json`
-- `README.md`
-- `README.zh-CN.md`
-
-如果后续发布到 npm，用户就可以直接这样安装：
-
-```bash
-openclaw plugins install @astronrpa/openclaw-plugin
-```
-
 ## 调试
 
 插件会输出这些调试信息：
@@ -202,5 +199,6 @@ openclaw plugins doctor
 
 如果 agent 看不到这个工具，优先检查：
 
+- `openclaw config get tools.profile` 返回的是 `full`
 - `plugins.entries["astron-rpa"].enabled` 是否为 `true`
 - 如果用了插件白名单，`plugins.allow` 里是否包含 `astron-rpa`
